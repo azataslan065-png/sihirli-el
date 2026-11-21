@@ -78,6 +78,7 @@ public class Ana extends Activity {
             @Override public void onPermissionRequestCanceled(PermissionRequest r) { if (bekleyen == r) bekleyen = null; }
         });
         w.loadUrl(ADRES);
+        Magaza.denetle(this);   // güncelleme varsa Uygulama Merkezi'ne yönlendirir (bkz. Magaza)
     }
 
     private boolean kameraIzniVar() {
@@ -124,6 +125,6 @@ public class Ana extends Activity {
     }
 
     @Override protected void onPause() { super.onPause(); w.onPause(); }
-    @Override protected void onResume() { super.onResume(); w.onResume(); tamEkran(); }
+    @Override protected void onResume() { super.onResume(); w.onResume(); tamEkran(); Magaza.denetle(this); }
     @Override protected void onDestroy() { if (w != null) w.destroy(); super.onDestroy(); }
 }
