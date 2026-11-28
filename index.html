@@ -216,6 +216,7 @@ rune.rotation.x=-Math.PI/2; rune.position.set(0,.02,2.5); scene.add(rune);
 // taş sütunlar ve yüzen adalar
 const stone=M({color:0x3b3366,roughness:.9,flatShading:true});
 for(let i=0;i<28;i++){ const a=i/28*Math.PI*2, r=rnd(16,55); const h=rnd(3,12);
+  if(Math.abs(Math.cos(a)*r)<12&&Math.sin(a)*r-12>-6) continue; // kameranın önüne sütun çıkmasın
   const p=new THREE.Mesh(new THREE.CylinderGeometry(rnd(.6,1.2),rnd(1,1.6),h,6),stone); p.position.set(Math.cos(a)*r,h/2,Math.sin(a)*r-12); scene.add(p);
   const orb=new THREE.Mesh(new THREE.SphereGeometry(.35,12,8),new THREE.MeshBasicMaterial({color:i%2?0x7cf7ff:0xb07cff})); orb.position.set(p.position.x,h+.6,p.position.z); scene.add(orb); }
 const isles=[]; for(let i=0;i<14;i++){ const g=new THREE.Mesh(new THREE.DodecahedronGeometry(rnd(1.5,3.5),0),stone); g.scale.y=.5; g.position.set(rnd(-50,50),rnd(8,24),rnd(-90,-20)); scene.add(g); isles.push(g); }
